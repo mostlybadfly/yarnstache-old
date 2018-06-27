@@ -40,7 +40,7 @@ class App extends Component {
           Authorization:
             'Basic ' +
             btoa(
-              'read-c78a1f769793d16b6a08a65b17d3dfb2:f9LCM+WVCvLC8cbrqzQilkS0ush/10PrHdraFZjx',
+              'user:password',
             ),
         }),
       },
