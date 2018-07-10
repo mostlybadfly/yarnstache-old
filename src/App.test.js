@@ -7,3 +7,10 @@ it('renders without crashing', () => {
   ReactDOM.render(<App />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
+
+// we could try to write this test if you're interested!
+describe('fetch request', () => {
+  xit('returns a list of yarns', () => {
+
+  })
+})

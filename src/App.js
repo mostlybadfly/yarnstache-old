@@ -1,6 +1,11 @@
+// Hey Daniel! Super excited to pair with you this evening.
+// Unfortunately I can't get any search results, so I can't see much on the browser, but here are a few initial thoughts!
+
 import React, {Component} from 'react';
 import logo from './logo.svg';
 import './App.css';
+
+// let's try to import from the /core/index.js files if possible! just to make these imports shorter
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
@@ -19,9 +24,12 @@ class App extends Component {
       error: null,
       isLoaded: false,
       items: [],
-      value: '',
+      value: '', // i'd love to rename this, simply because I don't know what the value should be and value sends to be predefined by many JS objects :)
       stash: []
     };
+
+    // nice! I didn't know you could bind functions in the constructor like this.
+    // We coud bind the functions at the definition level to avoid these few lines if you wanted
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addYarn = this.addYarn.bind(this);
@@ -61,10 +69,12 @@ class App extends Component {
           });
         },
       );
+    // I think we should move this to the top of the function, incase the fetch fails and the submit tries to redirect us
     event.preventDefault();
   }
 
   addYarn(event, yarn) {
+    // I like this!
     this.setState(prevState => ({
       stash: [...prevState.stash, yarn]
     }));
@@ -74,6 +84,7 @@ class App extends Component {
     console.log(yarn.name);
   }
 
+  // this render is fairly long, we can create some smaller components to make it more readable.
   render() {
     const {error, isLoaded, items, stash} = this.state;
     if (error) {
@@ -96,7 +107,7 @@ class App extends Component {
             <Grid item xs={8}>
               <Paper>
                 <Table>
-                  <TableBody>{items.map((yarn, index) => 
+                  <TableBody>{items.map((yarn, index) =>
                     <TableRow key={index}>
                       <TableCell>{yarn.name}</TableCell>
                       <TableCell>{yarn.first_photo ? <img src={yarn.first_photo.square_url} /> : ' NO IMAGE'}</TableCell>
