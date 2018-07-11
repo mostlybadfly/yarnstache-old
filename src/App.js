@@ -24,15 +24,13 @@ class App extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     fetch(
-      'https://api.ravelry.com/yarns/search.json?query=' + this.state.query,
+      process.env.REACT_APP_RAV_URL + this.state.query,
       {
         credentials: 'include',
         headers: new Headers({
           Authorization:
             'Basic ' +
-            btoa(
-              'read-c78a1f769793d16b6a08a65b17d3dfb2:f9LCM+WVCvLC8cbrqzQilkS0ush/10PrHdraFZjx',
-            ),
+            btoa(process.env.REACT_APP_RAV_LOGIN),
         }),
       },
     )
