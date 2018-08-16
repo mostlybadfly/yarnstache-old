@@ -6,7 +6,7 @@ import './App.css';
 
 import {Grid} from '@material-ui/core';
 
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link, Redirect, Switch} from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
@@ -66,25 +66,35 @@ class App extends Component {
                 <Link to="/">Home</Link>
               </li>
               <li>
+                <Link to="/search">Search</Link>
+              </li>
+              <li>
                 <Link to="/stash">My Stash</Link>
               </li>
             </ul>
 
-            <Route
-              path="/stash"
-              render={() => <Stash stash={this.state.stash} />}
-            />
-            <Route
-              path="/"
-              render={() => (
-                <Search
-                  {...this.state}
-                  handleChange={this.handleChange}
-                  handleSubmit={this.handleSubmit}
-                  addYarn={this.addYarn}
-                />
-              )}
-            />
+            <Switch>
+              <Route
+                exact path="/" render={() => (
+                  <h2>Welcom to Yarnstache</h2>
+                )}
+              />
+              <Route
+                path="/search"
+                render={() => (
+                  <Search
+                    {...this.state}
+                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit}
+                    addYarn={this.addYarn}
+                  />
+                )}
+              />
+              <Route
+                path="/stash"
+                render={() => <Stash stash={this.state.stash}/>}
+              />
+          </Switch>
           </div>
         </Router>
       </div>
