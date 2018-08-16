@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import Results from './Results.js';
 import Stash from './Stash.js';
+import Search from './Search.js';
 import './App.css';
 
 import {Grid} from '@material-ui/core';
+
+import {BrowserRouter as Router, Route, Link, Redirect, Switch} from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
@@ -13,34 +16,29 @@ class App extends Component {
       isLoaded: false,
       query: '',
       results: [],
-      stash: []
+      stash: [],
     };
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     this.setState({query: event.target.value});
-  }
+  };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
-    fetch(
-      process.env.REACT_APP_RAV_URL + this.state.query,
-      {
-        credentials: 'include',
-        headers: new Headers({
-          Authorization:
-            'Basic ' +
-            btoa(process.env.REACT_APP_RAV_LOGIN),
-        }),
-      },
-    )
+    fetch(process.env.REACT_APP_RAV_URL + this.state.query, {
+      credentials: 'include',
+      headers: new Headers({
+        Authorization: 'Basic ' + btoa(process.env.REACT_APP_RAV_LOGIN),
+      }),
+    })
       .then(response => response.json())
       .then(
         json => {
           console.log(json);
           this.setState({
             isLoaded: true,
-            results: json.yarns
+            results: json.yarns,
           });
         },
         error => {
@@ -50,39 +48,57 @@ class App extends Component {
           });
         },
       );
-  }
+  };
 
   addYarn = (event, yarn) => {
     this.setState(prevState => ({
-      stash: [...prevState.stash, yarn]
+      stash: [...prevState.stash, yarn],
     }));
-    }
+  };
 
   render() {
-    const {error, isLoaded, results, stash} = this.state;
-    if (error) {
-      return <div>Error: {error.message}</div>;
-    } else {
-      return (
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            <label>
-              Name:
-              <input
-                type="text"
-                value={this.state.query}
-                onChange={this.handleChange}
+    return (
+      <div>
+        <Router>
+          <div>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/search">Search</Link>
+              </li>
+              <li>
+                <Link to="/stash">My Stash</Link>
+              </li>
+            </ul>
+
+            <Switch>
+              <Route
+                exact path="/" render={() => (
+                  <h2>Welcom to Yarnstache</h2>
+                )}
               />
-            </label>
-            <input type="submit" value="Submit" />
-          </form>
-          <Grid container spacing={24}>
-          <Results results={this.state.results} addYarn={this.addYarn}/>
-          <Stash stash={this.state.stash} />
-          </Grid>
+              <Route
+                path="/search"
+                render={() => (
+                  <Search
+                    {...this.state}
+                    handleChange={this.handleChange}
+                    handleSubmit={this.handleSubmit}
+                    addYarn={this.addYarn}
+                  />
+                )}
+              />
+              <Route
+                path="/stash"
+                render={() => <Stash stash={this.state.stash}/>}
+              />
+          </Switch>
+          </div>
+        </Router>
       </div>
-      );
-    }
+    );
   }
 }
 
