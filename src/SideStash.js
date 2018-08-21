@@ -1,13 +1,20 @@
 import React, {Component} from 'react';
-import {Paper, Grid, GridList, GridListTile, GridListTileBar, ListSubheader} from '@material-ui/core';
+import {
+  Paper,
+  Grid,
+  GridList,
+  GridListTile,
+  GridListTileBar,
+  ListSubheader,
+} from '@material-ui/core';
 
 export default class Stash extends Component {
-  render () {
+  render() {
     return (
       <Grid item xs={4}>
         <Paper>
           <GridList cellHeight={180}>
-            <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+            <GridListTile key="Subheader" cols={2} style={{height: 'auto'}}>
               <ListSubheader component="div">Your Stash</ListSubheader>
             </GridListTile>
             {this.props.stash.map((yarn, index) => (
@@ -22,6 +29,6 @@ export default class Stash extends Component {
           </GridList>
         </Paper>
       </Grid>
-      )
-    }
+    );
+  }
 }

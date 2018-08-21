@@ -21,10 +21,10 @@ export default class Search extends Component {
           <input type="submit" value="Submit" />
         </form>
         <Grid container spacing={24}>
-        <Results results={this.props.results} addYarn={this.props.addYarn}/>
-        <SideStash stash={this.props.stash} />
+          <Results results={this.props.results} addYarn={this.props.addYarn} />
+          <SideStash stash={this.props.stash} />
         </Grid>
-    </div>
+      </div>
     );
   }
 }

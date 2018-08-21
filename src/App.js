@@ -4,9 +4,22 @@ import MyStash from './MyStash.js';
 import Search from './Search.js';
 import './App.css';
 
-import {Paper, Typography, Grid, AppBar, Toolbar, Button} from '@material-ui/core';
+import {
+  Paper,
+  Typography,
+  Grid,
+  AppBar,
+  Toolbar,
+  Button,
+} from '@material-ui/core';
 
-import {BrowserRouter as Router, Route, Link, Redirect, Switch} from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  Switch,
+} from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
@@ -63,22 +76,29 @@ class App extends Component {
           <div>
             <AppBar style={{backgroundColor: 'lavender'}} position="static">
               <Toolbar>
-                <Typography variant="title" color="inherit" style={{flexGrow: 1}}>
-                  <Link style={{textDecoration: 'none'}} to="/">YarnStache</Link>
+                <Typography
+                  variant="title"
+                  color="inherit"
+                  style={{flexGrow: 1}}>
+                  <Link style={{textDecoration: 'none'}} to="/">
+                    YarnStache
+                  </Link>
                 </Typography>
                 <Button component={Link} to="/search">
                   Search
                 </Button>
                 <Button component={Link} to="/stash">
-                  My Stash 
+                  My Stash
                 </Button>
               </Toolbar>
             </AppBar>
 
             <Switch>
               <Route
-                exact path="/" render={() => (
-                    <h2 style={{textAlign: 'center'}}>Welcome to Yarnstache</h2>
+                exact
+                path="/"
+                render={() => (
+                  <h2 style={{textAlign: 'center'}}>Welcome to Yarnstache</h2>
                 )}
               />
               <Route
@@ -94,9 +114,9 @@ class App extends Component {
               />
               <Route
                 path="/stash"
-                render={() => <MyStash stash={this.state.stash}/>}
+                render={() => <MyStash stash={this.state.stash} />}
               />
-          </Switch>
+            </Switch>
           </div>
         </Router>
       </Paper>
