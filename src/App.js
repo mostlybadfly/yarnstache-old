@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Results from './Results.js';
 import MyStash from './MyStash.js';
 import Search from './Search.js';
 import './App.css';
@@ -7,7 +6,6 @@ import './App.css';
 import {
   Paper,
   Typography,
-  Grid,
   AppBar,
   Toolbar,
   Button,
@@ -17,7 +15,6 @@ import {
   BrowserRouter as Router,
   Route,
   Link,
-  Redirect,
   Switch,
 } from 'react-router-dom';
 
