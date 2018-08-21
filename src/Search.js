@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Results from './Results.js';
-import Stash from './Stash.js';
+import SideStash from './SideStash.js';
 import './App.css';
 
 import {Grid} from '@material-ui/core';
@@ -22,7 +22,7 @@ export default class Search extends Component {
         </form>
         <Grid container spacing={24}>
         <Results results={this.props.results} addYarn={this.props.addYarn}/>
-        <Stash stash={this.props.stash} />
+        <SideStash stash={this.props.stash} />
         </Grid>
     </div>
     );
