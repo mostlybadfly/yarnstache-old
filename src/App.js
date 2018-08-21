@@ -1,12 +1,25 @@
 import React, {Component} from 'react';
 import Results from './Results.js';
-import Stash from './Stash.js';
+import MyStash from './MyStash.js';
 import Search from './Search.js';
 import './App.css';
 
-import {Grid} from '@material-ui/core';
+import {
+  Paper,
+  Typography,
+  Grid,
+  AppBar,
+  Toolbar,
+  Button,
+} from '@material-ui/core';
 
-import {BrowserRouter as Router, Route, Link, Redirect, Switch} from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  Switch,
+} from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
@@ -58,25 +71,34 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <Paper style={{height: '100%', flexGrow: 1}}>
         <Router>
           <div>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/search">Search</Link>
-              </li>
-              <li>
-                <Link to="/stash">My Stash</Link>
-              </li>
-            </ul>
+            <AppBar style={{backgroundColor: 'lavender'}} position="static">
+              <Toolbar>
+                <Typography
+                  variant="title"
+                  color="inherit"
+                  style={{flexGrow: 1}}>
+                  <Link style={{textDecoration: 'none'}} to="/">
+                    YarnStache
+                  </Link>
+                </Typography>
+                <Button component={Link} to="/search">
+                  Search
+                </Button>
+                <Button component={Link} to="/stash">
+                  My Stash
+                </Button>
+              </Toolbar>
+            </AppBar>
 
             <Switch>
               <Route
-                exact path="/" render={() => (
-                  <h2>Welcom to Yarnstache</h2>
+                exact
+                path="/"
+                render={() => (
+                  <h2 style={{textAlign: 'center'}}>Welcome to Yarnstache</h2>
                 )}
               />
               <Route
@@ -92,12 +114,12 @@ class App extends Component {
               />
               <Route
                 path="/stash"
-                render={() => <Stash stash={this.state.stash}/>}
+                render={() => <MyStash stash={this.state.stash} />}
               />
-          </Switch>
+            </Switch>
           </div>
         </Router>
-      </div>
+      </Paper>
     );
   }
 }
