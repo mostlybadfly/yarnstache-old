@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
 import {
   Grid,
-  Paper,
   Card,
-  CardActions,
   CardContent,
   CardMedia,
-  ListSubheader,
 } from '@material-ui/core';
 
 export default class Stash extends Component {
@@ -14,7 +11,7 @@ export default class Stash extends Component {
     return (
       <div>
         <h2 style={{textAlign: 'center'}}>My Stash</h2>
-        <Grid container spacing={18}>
+        <Grid container spacing={24}>
           {this.props.stash.map((yarn, index) => (
             <Grid item xs={4} style={{padding: 10}}>
               <Card style={{maxWidth: 345}}>
