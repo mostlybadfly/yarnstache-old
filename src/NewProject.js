@@ -38,7 +38,7 @@ export default class NewProject extends Component {
       notes: this.state.notes
     }
     this.props.addProject(project);
-    console.log(project);
+    
     this.setState({
       title: '',
       designer: '',

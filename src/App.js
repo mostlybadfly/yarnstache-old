@@ -59,8 +59,7 @@ class App extends Component {
     }));
   };
 
-  addProject = (event, project) => {
-    console.log(project);
+  addProject = (project) => {
     this.setState(prevState => ({
       projects: [...prevState.projects, project],
     }));
