@@ -8,10 +8,13 @@ import {
   DialogContent,
   DialogTitle,
   Button,
-  GridList,
-  GridListTile,
-  GridListTileBar,
+  List,
   ListSubheader,
+  ListItemText,
+  ListItem,
+  ListItemSecondaryAction,
+  Avatar,
+  Checkbox
 } from '@material-ui/core';
 
 export default class NewProject extends Component {
@@ -25,6 +28,7 @@ export default class NewProject extends Component {
       notes: [],
 
       open: false,
+      checked: []
     };
   }
 
@@ -34,7 +38,7 @@ export default class NewProject extends Component {
       title: this.state.title,
       designer: this.state.designer,
       recipient: this.state.recipient,
-      yarns: this.state.yarns,
+      yarns: this.state.checked,
       notes: this.state.notes
     }
     this.props.addProject(project);
@@ -44,7 +48,7 @@ export default class NewProject extends Component {
       designer: '',
       recipient: '',
       yarns: [],
-      notes: ''
+      notes: '',
     })
   };
 
@@ -76,6 +80,22 @@ export default class NewProject extends Component {
     this.setState({open: false});
   };
 
+  handleToggle = yarn => () => {
+    const { checked } = this.state;
+    const currentIndex = checked.indexOf(yarn);
+    const newChecked = [...checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(yarn);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+
+    this.setState({
+      checked: newChecked,
+    });
+  };
+
   render() {
     return (
       <div style={{padding: 10}}>
@@ -97,20 +117,21 @@ export default class NewProject extends Component {
           <Dialog open={this.state.open} onClose={this.handleClose}>
             <DialogTitle>Select your yarns</DialogTitle>
             <DialogContent>
-              <GridList cellHeight={90}>
-                <GridListTile key="Subheader" cols={2} style={{height: 'auto'}}>
-                  <ListSubheader component="div">Your Stash</ListSubheader>
-                </GridListTile>
+              <List>
+                <ListSubheader component="div">Your Stash</ListSubheader>
                 {this.props.stash.map((yarn, index) => (
-                  <GridListTile key={yarn.first_photo.small_url}>
-                    <img src={yarn.first_photo.small_url} alt={yarn.name} />
-                    <GridListTileBar
-                      title={yarn.name}
-                      subtitle={<span>{yarn.yarn_company_name}</span>}
-                    />
-                  </GridListTile>
+                  <ListItem key={index} button>
+                    <Avatar src={yarn.first_photo.small_url} alt={yarn.name} />
+                    <ListItemText  primary={yarn.yarn_company_name + " " + yarn.name} />
+                    <ListItemSecondaryAction>
+                      <Checkbox
+                        onChange={this.handleToggle(yarn)}
+                        checked={this.state.checked.indexOf(yarn) !== -1}
+                      />
+                    </ListItemSecondaryAction>
+                  </ListItem>
                 ))}
-              </GridList>
+              </List>
             </DialogContent>
             <DialogActions>
               <Button onClick={this.handleClose}>Close</Button>
