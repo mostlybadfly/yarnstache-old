@@ -1,22 +1,13 @@
 import React, {Component} from 'react';
 import MyStash from './MyStash.js';
 import Search from './Search.js';
+import Projects from './Projects.js';
+import NewProject from './NewProject.js';
 import './App.css';
 
-import {
-  Paper,
-  Typography,
-  AppBar,
-  Toolbar,
-  Button,
-} from '@material-ui/core';
+import {Paper, Typography, AppBar, Toolbar, Button} from '@material-ui/core';
 
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
@@ -27,7 +18,9 @@ class App extends Component {
       query: '',
       results: [],
       stash: [],
+      projects: [],
     };
+    this.addProject = this.addProject.bind(this);
   }
 
   handleChange = event => {
@@ -66,6 +59,12 @@ class App extends Component {
     }));
   };
 
+  addProject = (project) => {
+    this.setState(prevState => ({
+      projects: [...prevState.projects, project],
+    }));
+  };
+
   render() {
     return (
       <Paper style={{height: '100%', flexGrow: 1}}>
@@ -86,6 +85,9 @@ class App extends Component {
                 </Button>
                 <Button component={Link} to="/stash">
                   My Stash
+                </Button>
+                <Button component={Link} to="/projects">
+                  Projects
                 </Button>
               </Toolbar>
             </AppBar>
@@ -113,7 +115,25 @@ class App extends Component {
                 path="/stash"
                 render={() => <MyStash stash={this.state.stash} />}
               />
-            </Switch>
+              <Route
+                path="/projects"
+                render={() => (
+                  <Projects
+                    projects={this.state.projects}
+                  />
+                )}
+              />
+              <Route
+                path="/new-project"
+                render={() => (
+                  <NewProject
+                    projects={this.state.projects}
+                    stash={this.state.stash}
+                    addProject={this.addProject}
+                  />
+                )}
+              />
+             </Switch>
           </div>
         </Router>
       </Paper>
