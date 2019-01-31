@@ -67,7 +67,7 @@ class App extends Component {
 
   render() {
     return (
-      <Paper style={{height: '100%', flexGrow: 1}}>
+      <Paper>
         <Router>
           <div>
             <AppBar style={{backgroundColor: 'lavender'}} position="static">
