@@ -3,7 +3,6 @@ import MyStash from './MyStash.js';
 import Search from './Search.js';
 import Projects from './Projects.js';
 import NewProject from './NewProject.js';
-import NewYarn from './NewYarn.js';
 import './App.css';
 
 import {Paper, Typography, AppBar, Toolbar, Button} from '@material-ui/core';
@@ -22,7 +21,6 @@ class App extends Component {
       projects: [],
     };
     this.addProject = this.addProject.bind(this);
-    this.addYarn = this.addYarn.bind(this);
   }
 
   handleChange = event => {
@@ -55,7 +53,7 @@ class App extends Component {
       );
   };
 
-  addYarn = (yarn) => {
+  addYarn = (event, yarn) => {
     this.setState(prevState => ({
       stash: [...prevState.stash, yarn],
     }));
@@ -82,6 +80,9 @@ class App extends Component {
                     YarnStache
                   </Link>
                 </Typography>
+                <Button component={Link} to="/search">
+                  Search
+                </Button>
                 <Button component={Link} to="/stash">
                   My Stash
                 </Button>
@@ -129,15 +130,6 @@ class App extends Component {
                     projects={this.state.projects}
                     stash={this.state.stash}
                     addProject={this.addProject}
-                  />
-                )}
-              />
-              <Route
-                path="/new-yarn"
-                render={() => (
-                  <NewYarn
-                    stash={this.state.stash}
-                    addYarn={this.addYarn}
                   />
                 )}
               />
