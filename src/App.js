@@ -14,46 +14,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: null,
-      isLoaded: false,
-      query: '',
-      results: [],
       stash: [],
       projects: [],
     };
     this.addProject = this.addProject.bind(this);
     this.addYarn = this.addYarn.bind(this);
   }
-
-  handleChange = event => {
-    this.setState({query: event.target.value});
-  };
-
-  handleSubmit = event => {
-    event.preventDefault();
-    fetch(process.env.REACT_APP_RAV_URL + this.state.query, {
-      credentials: 'include',
-      headers: new Headers({
-        Authorization: 'Basic ' + btoa(process.env.REACT_APP_RAV_LOGIN),
-      }),
-    })
-      .then(response => response.json())
-      .then(
-        json => {
-          console.log(json);
-          this.setState({
-            isLoaded: true,
-            results: json.yarns,
-          });
-        },
-        error => {
-          this.setState({
-            isLoaded: true,
-            error,
-          });
-        },
-      );
-  };
 
   addYarn = (yarn) => {
     this.setState(prevState => ({
@@ -103,10 +69,6 @@ class App extends Component {
                 path="/search"
                 render={() => (
                   <Search
-                    {...this.state}
-                    handleChange={this.handleChange}
-                    handleSubmit={this.handleSubmit}
-                    addYarn={this.addYarn}
                   />
                 )}
               />
