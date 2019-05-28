@@ -15,6 +15,13 @@ export default class Results extends Component {
             <TableRow style={{height: '100%'}} key={index}>
               <TableCell>{yarn.name}</TableCell>
               <TableCell>
+                {yarn.first_photo ? (
+                  <img src={yarn.first_photo.square_url} alt={yarn.name}/>
+                ) : (
+                  ' NO IMAGE'
+                )}
+              </TableCell>
+              <TableCell>
                 <input
                   type="button"
                   value="Add to Stash"
