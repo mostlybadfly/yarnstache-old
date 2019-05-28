@@ -42,7 +42,7 @@ export default class NewProject extends Component {
       notes: this.state.notes
     }
     this.props.addProject(project);
-    
+
     this.setState({
       title: '',
       designer: '',
@@ -78,22 +78,6 @@ export default class NewProject extends Component {
 
   handleClose = () => {
     this.setState({open: false});
-  };
-
-  handleToggle = yarn => () => {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(yarn);
-    const newChecked = [...checked];
-
-    if (currentIndex === -1) {
-      newChecked.push(yarn);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    this.setState({
-      checked: newChecked,
-    });
   };
 
   render() {
