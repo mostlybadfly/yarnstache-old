@@ -42,7 +42,7 @@ export default class NewProject extends Component {
       notes: this.state.notes
     }
     this.props.addProject(project);
-    
+
     this.setState({
       title: '',
       designer: '',
@@ -121,8 +121,7 @@ export default class NewProject extends Component {
                 <ListSubheader component="div">Your Stash</ListSubheader>
                 {this.props.stash.map((yarn, index) => (
                   <ListItem key={index} button>
-                    <Avatar src={yarn.first_photo.small_url} alt={yarn.name} />
-                    <ListItemText  primary={yarn.yarn_company_name + " " + yarn.name} />
+                    <ListItemText  primary={yarn.name} />
                     <ListItemSecondaryAction>
                       <Checkbox
                         onChange={this.handleToggle(yarn)}
