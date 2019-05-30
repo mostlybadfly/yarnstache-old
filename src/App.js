@@ -6,21 +6,9 @@ import NewProject from './NewProject.js';
 import NewYarn from './NewYarn.js';
 import './App.css';
 
-import {Box, Button, Grommet, Heading} from 'grommet';
+import {Paper, Typography, AppBar, Toolbar, Button} from '@material-ui/core';
 
 import {BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom';
-    const AppBar = props => (
-      <Box
-        tag="header"
-        direction="row"
-        align="center"
-        justify="between"
-        background="light-2"
-        pad={{vertical: 'small', horizontal: 'medium'}}
-        elevation="medium"
-        {...props}
-      />
-    );
 
 class App extends Component {
   constructor(props) {
@@ -33,13 +21,13 @@ class App extends Component {
     this.addYarn = this.addYarn.bind(this);
   }
 
-  addYarn = yarn => {
+  addYarn = (yarn) => {
     this.setState(prevState => ({
       stash: [...prevState.stash, yarn],
     }));
   };
 
-  addProject = project => {
+  addProject = (project) => {
     this.setState(prevState => ({
       projects: [...prevState.projects, project],
     }));
@@ -47,25 +35,26 @@ class App extends Component {
 
   render() {
     return (
-      <Grommet>
+      <Paper>
         <Router>
           <div>
-            <AppBar>
-              <Heading level='3' margin='none'>
-                <Link style={{textDecoration: 'none'}} to="/">
-                  YarnStache
-                </Link>
-              </Heading>
-              <Button href="/stash">
-                <Link style={{textDecoration: 'none'}} to="/stash">
+            <AppBar style={{backgroundColor: 'lavender'}} position="static">
+              <Toolbar>
+                <Typography
+                  variant="title"
+                  color="inherit"
+                  style={{flexGrow: 1}}>
+                  <Link style={{textDecoration: 'none'}} to="/">
+                    YarnStache
+                  </Link>
+                </Typography>
+                <Button component={Link} to="/stash">
                   My Stash
-                </Link>
-              </Button>
-              <Button>
-                <Link style ={{textDecoration: 'none'}} to="/projects">
+                </Button>
+                <Button component={Link} to="/projects">
                   Projects
-                </Link>
-              </Button>
+                </Button>
+              </Toolbar>
             </AppBar>
 
             <Switch>
@@ -76,14 +65,24 @@ class App extends Component {
                   <h2 style={{textAlign: 'center'}}>Welcome to Yarnstache</h2>
                 )}
               />
-              <Route path="/search" render={() => <Search />} />
+              <Route
+                path="/search"
+                render={() => (
+                  <Search
+                  />
+                )}
+              />
               <Route
                 path="/stash"
                 render={() => <MyStash stash={this.state.stash} />}
               />
               <Route
                 path="/projects"
-                render={() => <Projects projects={this.state.projects} />}
+                render={() => (
+                  <Projects
+                    projects={this.state.projects}
+                  />
+                )}
               />
               <Route
                 path="/new-project"
@@ -98,13 +97,16 @@ class App extends Component {
               <Route
                 path="/new-yarn"
                 render={() => (
-                  <NewYarn stash={this.state.stash} addYarn={this.addYarn} />
+                  <NewYarn
+                    stash={this.state.stash}
+                    addYarn={this.addYarn}
+                  />
                 )}
               />
-            </Switch>
+             </Switch>
           </div>
         </Router>
-      </Grommet>
+      </Paper>
     );
   }
 }
