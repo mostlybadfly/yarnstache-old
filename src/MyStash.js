@@ -19,10 +19,6 @@ export default class Stash extends Component {
             {this.props.stash.map((yarn, index) => (
               <Grid item xs={4}>
                 <Card>
-                  <CardMedia
-                    style={{height: 0, padding: '56.25%'}}
-                    image={yarn.first_photo.medium_url}
-                  />
                   <CardContent>{yarn.name}</CardContent>
                 </Card>
               </Grid>
