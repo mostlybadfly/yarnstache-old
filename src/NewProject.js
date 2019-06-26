@@ -13,7 +13,6 @@ import {
   ListItemText,
   ListItem,
   ListItemSecondaryAction,
-  Avatar,
   Checkbox
 } from '@material-ui/core';
 

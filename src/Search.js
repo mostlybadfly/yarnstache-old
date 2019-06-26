@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import SideStash from './SideStash.js';
 import './App.css';
 
 import {Grid, Table, TableBody, TableRow, TableCell} from '@material-ui/core';

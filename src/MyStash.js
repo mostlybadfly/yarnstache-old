@@ -1,11 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import {
-  Grid,
-  Card,
-  CardContent,
-  CardMedia,
-} from '@material-ui/core';
+import {Box, Text} from 'grommet';
 
 export default class Stash extends Component {
   render() {
@@ -15,15 +10,13 @@ export default class Stash extends Component {
        Add Yarn
       </Link>
        <h2 style={{textAlign: 'center'}}>My Stash</h2>
-        <Grid container spacing={40}>
+        <Box>
             {this.props.stash.map((yarn, index) => (
-              <Grid item xs={4}>
-                <Card>
-                  <CardContent>{yarn.name}</CardContent>
-                </Card>
-              </Grid>
+              <Text>
+                {yarn.name}
+              </Text>
             ))}
-        </Grid>
+        </Box>
       </div>
     );
   }
